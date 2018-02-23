@@ -7,7 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	require("../../Assets/db-conn.php");
 	
 	//Capture the info sent previously by POST Method
-	$className = mysqli_real_escape_string($mysqli,$_POST["classname"]);
+	$className = mysqli_real_escape_string($mysqli,$_POST["classadd"]);
 
 	//Write an SQL Query
 	$sql = "INSERT INTO class_master(class_name) VALUES('$className')";
