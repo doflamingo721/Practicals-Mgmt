@@ -1,11 +1,11 @@
 <HTML>
 	<BODY>
-		<FORM>
-	Enter First Name:<input type="text" id="firstname" name="firstname"><br>
-	Enter Middle Name:<input type="text" id="middlename" name="middlename"><br>
-	Enter Last Name:<input type="text" id="lastname" name="lastname"><br>
-	UserName:<input type="text" id="username" name="username" disabled><br>
+		<FORM name="facultyInfo">
+	Enter First Name:<input type="text" id="fname" name="fname"><br>
+	Enter Middle Name:<input type="text" id="mname" name="mname"><br>
+	Enter Last Name:<input type="text" id="lname" name="lname"><br>
+	UserName:<input type="text" id="uname" name="uname" disabled><br>
 	<input type="submit" value="submit"> 
-		</FORM>
+			<FORM>
 	</BODY>
 </HTML>
