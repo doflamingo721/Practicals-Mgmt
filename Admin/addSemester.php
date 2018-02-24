@@ -5,7 +5,7 @@ Add Current Semester<br><br>
 						<option id="className" name="className"></option>
 					  </select><br><br>
 		Select Semester Number: <select id="semesterNumbers">
-						<option id="semesterNo" name="courseNo"></option>
+						<option id="semesterNo" name="semesterNo"></option>
 					  </select> <br><br>
 		Select Semester Name: <select id="semesters">
 						  <option id="semesterName" name="semesterName"></option>
