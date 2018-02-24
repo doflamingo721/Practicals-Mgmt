@@ -5,21 +5,6 @@ Show submissions<br><br>
 <form action="" method="">
 
 		Select Course 
-<<<<<<< refs/remotes/origin/master
-			<select id="courses">
-				<option id="courseName"></option>
-			</select>
-			
-		Select Division
-			<select id="divisions">
-				<option id="divisionName"></option>
-			</select>
-			
-		Select Batch
-			<select id="classes">
-				<option id="batchName"></option>
-			</select>
-=======
 			<select id="courses"name="courses">
 				<option id="courseName" name="courseName"></option>
 			</select>
@@ -36,7 +21,6 @@ Show submissions<br><br>
 				<option id="batchName" name="batchName"></option>
 			</select>
 			<br>
->>>>>>> updated basic faculty skeleton files
 			
 		<input type="submit" >
 		

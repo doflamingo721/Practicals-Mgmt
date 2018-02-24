@@ -5,33 +5,6 @@ Add assignment<br><br>
 <form action="" method="">
 
 		Select Course 
-<<<<<<< refs/remotes/origin/master
-			<select id="courses">
-				<option id="courseName"></option>
-			</select>
-			
-		Select Division
-			<select id="divisions">
-				<option id="divisionName"></option>
-			</select>
-			
-		Select Batch
-			<select id="classes">
-				<option id="batchName"></option>
-			</select>
-			
-		Assignment Question
-			<input type="text" id="assignmentQuestion">
-			
-		Description
-			<input type="text" id="assignmentDescription">
-			
-		Start Date
-			<input type="date" id="startDate">
-			
-		End Date
-			<input type="date" id="endDate">
-=======
 			<select id="courses" name="courses">
 				<option id="courseName" name="courseName"></option>
 			</select>
@@ -65,7 +38,6 @@ Add assignment<br><br>
 		End Date
 			<input type="date" id="endDate" name="endDate">
 			<br>
->>>>>>> updated basic faculty skeleton files
 			
 		<input type="submit" >
 		
