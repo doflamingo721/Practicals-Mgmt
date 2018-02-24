@@ -7,6 +7,9 @@ Teacher Allocation to Course<br><br>
 		Select Class: <select id="classes">
 						<option id="className" name="className"></option>
 					  </select><br><br>
+		Select Batch: <select id="batches">
+						<option id="batchName" name="batchName"></option>
+					  </select><br><br>
 		Select Course: <select id="courses">
 						<option id="courseName" name="courseName"></option>
 					  </select> <br><br>
