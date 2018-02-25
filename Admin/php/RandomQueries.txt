@@ -1,0 +1,29 @@
+/**************************************************************/
+* From Student POV find the courses offered for a given sem    *
+*                                                              *
+/**************************************************************/
+SELECT course_master.course_name
+FROM student_allocation
+JOIN course_master ON student_allocation.course_id = course_master.course_id
+WHERE student_allocation.enrollment_id = 1506066 and student_allocation.sem_id = 5
+
+/**************************************************************/
+* From Admin POV find the courses offered for a given sem for  *
+* every student                                                *
+/**************************************************************/
+SELECT student_allocation.enrollment_id,faculty_master.fname,faculty_master.lname,course_master.course_name,batch_master.batch_name
+FROM student_allocation
+JOIN faculty_master ON student_allocation.faculty_id = faculty_master.faculty_id
+JOIN course_master ON student_allocation.course_id = course_master.course_id
+JOIN batch_master ON student_allocation.batch_id = batch_master.batch_id
+where student_allocation.sem_id = 1 ORDER BY enrollment_id ASC
+
+/**************************************************************/
+* From Faculty POV find the courses offered and students for a *
+* a particular sem id                                          *
+/**************************************************************/
+SELECT student_master.enrollment_id,course_master.course_name
+FROM student_allocation
+JOIN student_master ON student_allocation.enrollment_id = student_master.enrollment_id
+JOIN course_master ON student_allocation.course_id = course_master.course_id
+WHERE faculty_id = 1 and sem_id = 1
