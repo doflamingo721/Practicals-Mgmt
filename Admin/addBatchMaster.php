@@ -1,14 +1,40 @@
-// Add Batch 
+<?php
+	require("../Assets/db-conn.php");
+
+	// Create query to retrieve class names
+	$sql = "SELECT batch_name FROM batch_master ORDER BY batch_name";
+
+	// Obtain result set
+	$result = $mysqli->query($sql);
+
+	$i = 1;
+?>
+
 <HTML>
 	<BODY>
-		<FORM>
-			Enter Class Name:<input type="text" id="classname" name="classname"><br>
-			Select Batch:<select name="batch">
-    		<option value="A">A</option>
-    		<option value="B">B</option>
-    		<option value="C">C</option>
-  			</select><br>
-				<input type="submit" value="CREATE BATCH">	
+		<h3> Batch Already Created </h3>
+		<table>
+			<tr>
+				<th>Sr No</th>
+				<th>Batch Name</th>
+			</tr>
+			<?php while($row = $result->fetch_assoc()) { ?>
+			<tr>
+				<td> <?php echo $i; ?></td>
+				<td> <?php echo $row["batch_name"]; ?></td>
+			</tr>
+			<?php  $i++; } ?>
+		</table>
+		<h3>Add Batch</h3>
+		<FORM action="php/addBatchMaster.php" method="post">
+			Add batch:<input type="text" name="batch" id="batch">
+				<input type="submit" value="submit">	
 		</FORM>
+		<h3>Delete Batch</h3>
+		<FORM action="php/deleteBatchMaster.php" method="post">
+			Batch:<input type="text" name="batch" id="batch">
+				<input type="submit" value="submit">	
+		</FORM>
+
 	</BODY>
 </HTML>

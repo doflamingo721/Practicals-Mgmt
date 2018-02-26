@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2018 at 10:49 AM
+-- Generation Time: Feb 25, 2018 at 10:24 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -125,6 +125,15 @@ CREATE TABLE `batch_master` (
   `batch_name` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `batch_master`
+--
+
+INSERT INTO `batch_master` (`batch_id`, `batch_name`) VALUES
+(1, 'A'),
+(2, 'B'),
+(3, 'C');
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +145,22 @@ CREATE TABLE `class_master` (
   `class_name` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `class_master`
+--
+
+INSERT INTO `class_master` (`class_id`, `class_name`) VALUES
+(1, 'G'),
+(2, 'H'),
+(3, 'B1'),
+(4, 'B2'),
+(5, 'A2'),
+(6, 'N'),
+(7, 'B3'),
+(8, 'A3'),
+(9, 'A1'),
+(11, '');
+
 -- --------------------------------------------------------
 
 --
@@ -144,13 +169,21 @@ CREATE TABLE `class_master` (
 
 CREATE TABLE `course_master` (
   `course_id` int(3) NOT NULL,
-  `course_name` varchar(5) DEFAULT NULL,
+  `course_code` varchar(5) DEFAULT NULL,
+  `course_name` varchar(25) DEFAULT NULL,
   `theory` int(1) DEFAULT NULL,
   `practical` int(1) DEFAULT NULL,
   `termwork` int(1) DEFAULT NULL,
   `oral` int(1) DEFAULT NULL,
   `path` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course_master`
+--
+
+INSERT INTO `course_master` (`course_id`, `course_code`, `course_name`, `theory`, `practical`, `termwork`, `oral`, `path`) VALUES
+(3, 'CM532', 'jsp', 0, 0, 0, 0, 'GS1');
 
 -- --------------------------------------------------------
 
@@ -160,11 +193,19 @@ CREATE TABLE `course_master` (
 
 CREATE TABLE `faculty_master` (
   `faculty_id` int(3) NOT NULL,
-  `username` varchar(30) DEFAULT NULL,
+  `username` varchar(30) NOT NULL,
   `fname` varchar(25) DEFAULT NULL,
   `mname` varchar(25) DEFAULT NULL,
   `lname` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `faculty_master`
+--
+
+INSERT INTO `faculty_master` (`faculty_id`, `username`, `fname`, `mname`, `lname`) VALUES
+(2, 'MGYawalkar', 'Megha', 'G', 'Yawalkar'),
+(5, 'VSPawar', 'Vaishali', 'S', 'Pawar');
 
 -- --------------------------------------------------------
 
@@ -187,23 +228,19 @@ CREATE TABLE `notice` (
 
 CREATE TABLE `role_master` (
   `role_id` int(2) NOT NULL,
-  `username` varchar(30) DEFAULT NULL,
   `fname` varchar(25) DEFAULT NULL,
+  `mname` varchar(25) DEFAULT NULL,
   `lname` varchar(25) DEFAULT NULL,
+  `username` varchar(30) DEFAULT NULL,
   `password` varchar(70) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `semester_master`
+-- Dumping data for table `role_master`
 --
 
-CREATE TABLE `semester_master` (
-  `sem_id` int(2) NOT NULL,
-  `sem_code` int(3) NOT NULL,
-  `sem_name` varchar(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `role_master` (`role_id`, `fname`, `mname`, `lname`, `username`, `password`) VALUES
+(1, 'U', 'V', 'Kokate', 'cmhod', 'cmhod');
 
 -- --------------------------------------------------------
 
@@ -231,6 +268,17 @@ CREATE TABLE `student_master` (
   `fname` varchar(25) DEFAULT NULL,
   `lname` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_master`
+--
+
+INSERT INTO `student_master` (`enrollment_id`, `fname`, `lname`) VALUES
+(1506029, 'Atharva', 'Deshpande'),
+(1506040, 'Vaishnav', 'Gaikwad'),
+(1506053, 'Kaushal', 'Jain'),
+(1506059, 'Diksha ', 'Katke'),
+(1506066, 'Gaurav', 'Kondhare');
 
 --
 -- Indexes for dumped tables
@@ -322,12 +370,6 @@ ALTER TABLE `role_master`
   ADD PRIMARY KEY (`role_id`);
 
 --
--- Indexes for table `semester_master`
---
-ALTER TABLE `semester_master`
-  ADD PRIMARY KEY (`sem_id`);
-
---
 -- Indexes for table `student_allocation`
 --
 ALTER TABLE `student_allocation`
@@ -376,25 +418,25 @@ ALTER TABLE `assignment_submission`
 -- AUTO_INCREMENT for table `batch_master`
 --
 ALTER TABLE `batch_master`
-  MODIFY `batch_id` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `batch_id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `class_master`
 --
 ALTER TABLE `class_master`
-  MODIFY `class_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `class_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `course_master`
 --
 ALTER TABLE `course_master`
-  MODIFY `course_id` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `course_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `faculty_master`
 --
 ALTER TABLE `faculty_master`
-  MODIFY `faculty_id` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `faculty_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `notice`
@@ -406,13 +448,13 @@ ALTER TABLE `notice`
 -- AUTO_INCREMENT for table `role_master`
 --
 ALTER TABLE `role_master`
-  MODIFY `role_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `role_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `student_master`
 --
 ALTER TABLE `student_master`
-  MODIFY `enrollment_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `enrollment_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1506067;
 
 --
 -- Constraints for dumped tables

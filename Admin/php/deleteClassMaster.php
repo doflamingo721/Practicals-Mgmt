@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$className = mysqli_real_escape_string($mysqli,$_POST["classdelete"]);
 
 	// Sql query to retrieve entered class
-	$sql = "SELECT * FROM class_master WHERE class_name='".$className."'";
+	$sql = "SELECT class_name FROM class_master WHERE class_name='".$className."'";
 
    //Obtain result set
 	$result = $mysqli->query($sql);
