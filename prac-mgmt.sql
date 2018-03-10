@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 25, 2018 at 06:11 AM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Host: 127.0.0.1
+-- Generation Time: Mar 10, 2018 at 05:05 PM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `prac-mgmt`
+-- Database: `branch`
 --
 
 -- --------------------------------------------------------
@@ -69,12 +69,24 @@ CREATE TABLE `allocation` (
 CREATE TABLE `assignments` (
   `assignment_id` int(3) NOT NULL,
   `assignment_no` int(2) DEFAULT NULL,
+  `question` varchar(50) NOT NULL,
+  `description` varchar(300) NOT NULL,
+  `sem_id` int(2) DEFAULT NULL,
   `course_id` int(3) DEFAULT NULL,
   `class_id` int(2) DEFAULT NULL,
+  `faculty_id` int(3) NOT NULL,
   `batch_id` int(1) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `assignments`
+--
+
+INSERT INTO `assignments` (`assignment_id`, `assignment_no`, `question`, `description`, `sem_id`, `course_id`, `class_id`, `faculty_id`, `batch_id`, `start_date`, `end_date`) VALUES
+(5, 1, 'Hello', 'Kaushal', 5, 6, 1, 6, 3, '2018-03-10', '1970-01-01'),
+(6, 2, 'Hello', 'Hi', 5, 6, 1, 6, 2, '2018-03-10', '1970-01-01');
 
 -- --------------------------------------------------------
 
@@ -110,8 +122,14 @@ CREATE TABLE `assignment_master` (
 CREATE TABLE `assignment_submission` (
   `submission_id` int(5) NOT NULL,
   `enrollment_id` int(7) DEFAULT NULL,
-  `answer` blob,
-  `submission_date` date DEFAULT NULL
+  `sem_id` int(2) NOT NULL,
+  `class_id` int(2) NOT NULL,
+  `course_id` int(2) NOT NULL,
+  `batch_id` int(1) NOT NULL,
+  `input_file` blob,
+  `output_image` blob NOT NULL,
+  `submission_date` date DEFAULT NULL,
+  `attempted` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -212,7 +230,28 @@ INSERT INTO `faculty_master` (`faculty_id`, `username`, `fname`, `mname`, `lname
 (2, 'dk', 'Diksha', 'M', 'Katake'),
 (4, NULL, 'Megha', NULL, 'Yawalkar'),
 (5, NULL, 'Harshada', NULL, 'Pawar'),
-(6, NULL, 'Archana', NULL, 'Ghalshetwar');
+(6, 'AMGhalshetwar', 'Archana', 'M', 'Ghalshetwar');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
+--
+
+CREATE TABLE `login` (
+  `id` int(2) NOT NULL,
+  `username` varchar(25) DEFAULT NULL,
+  `password` varchar(25) DEFAULT NULL,
+  `access_level` int(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`id`, `username`, `password`, `access_level`) VALUES
+(1, '1506053', '1506053', 3),
+(2, 'AMGhalshetwar', 'hello', 2);
 
 -- --------------------------------------------------------
 
@@ -426,10 +465,12 @@ ALTER TABLE `allocation`
 -- Indexes for table `assignments`
 --
 ALTER TABLE `assignments`
-  ADD KEY `assignments-assignmentid` (`assignment_id`),
+  ADD PRIMARY KEY (`assignment_id`),
   ADD KEY `assignments-courseid` (`course_id`),
   ADD KEY `assignments-batchid` (`batch_id`),
-  ADD KEY `assignments-classid` (`class_id`);
+  ADD KEY `assignments-classid` (`class_id`),
+  ADD KEY `assignments-semid` (`sem_id`),
+  ADD KEY `assignments-facultyid` (`faculty_id`);
 
 --
 -- Indexes for table `assignment_marks`
@@ -450,7 +491,11 @@ ALTER TABLE `assignment_master`
 --
 ALTER TABLE `assignment_submission`
   ADD PRIMARY KEY (`submission_id`),
-  ADD KEY `assignment-submission-enrollmentid` (`enrollment_id`);
+  ADD KEY `assignment-submission-enrollmentid` (`enrollment_id`),
+  ADD KEY `assignment-submission-semid` (`sem_id`),
+  ADD KEY `assignment-submission-classid` (`class_id`),
+  ADD KEY `assignment-submission-courseid` (`course_id`),
+  ADD KEY `assignment-submission-batchid` (`batch_id`);
 
 --
 -- Indexes for table `batch_master`
@@ -475,6 +520,12 @@ ALTER TABLE `course_master`
 --
 ALTER TABLE `faculty_master`
   ADD PRIMARY KEY (`faculty_id`);
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `notice`
@@ -522,6 +573,12 @@ ALTER TABLE `accounts_student`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `assignments`
+--
+ALTER TABLE `assignments`
+  MODIFY `assignment_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `assignment_marks`
 --
 ALTER TABLE `assignment_marks`
@@ -562,6 +619,12 @@ ALTER TABLE `course_master`
 --
 ALTER TABLE `faculty_master`
   MODIFY `faculty_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `login`
+--
+ALTER TABLE `login`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `notice`
@@ -613,10 +676,11 @@ ALTER TABLE `allocation`
 -- Constraints for table `assignments`
 --
 ALTER TABLE `assignments`
-  ADD CONSTRAINT `assignments-assignmentid` FOREIGN KEY (`assignment_id`) REFERENCES `assignment_master` (`assignment_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `assignments-batchid` FOREIGN KEY (`batch_id`) REFERENCES `batch_master` (`batch_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `assignments-classid` FOREIGN KEY (`class_id`) REFERENCES `class_master` (`class_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `assignments-courseid` FOREIGN KEY (`course_id`) REFERENCES `course_master` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `assignments-courseid` FOREIGN KEY (`course_id`) REFERENCES `course_master` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `assignments-facultyid` FOREIGN KEY (`faculty_id`) REFERENCES `faculty_master` (`faculty_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `assignments-semid` FOREIGN KEY (`sem_id`) REFERENCES `semester_master` (`sem_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `assignment_marks`
@@ -629,7 +693,11 @@ ALTER TABLE `assignment_marks`
 -- Constraints for table `assignment_submission`
 --
 ALTER TABLE `assignment_submission`
-  ADD CONSTRAINT `assignment-submission-enrollmentid` FOREIGN KEY (`enrollment_id`) REFERENCES `student_master` (`enrollment_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `assignment-submission-batchid` FOREIGN KEY (`batch_id`) REFERENCES `batch_master` (`batch_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `assignment-submission-classid` FOREIGN KEY (`class_id`) REFERENCES `class_master` (`class_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `assignment-submission-courseid` FOREIGN KEY (`course_id`) REFERENCES `course_master` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `assignment-submission-enrollmentid` FOREIGN KEY (`enrollment_id`) REFERENCES `student_master` (`enrollment_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `assignment-submission-semid` FOREIGN KEY (`sem_id`) REFERENCES `semester_master` (`sem_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student_allocation`
