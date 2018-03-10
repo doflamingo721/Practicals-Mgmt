@@ -71,11 +71,11 @@
 
     	<br>
     	<label>Upload program file : </label>
-    	<input type="file" name="input_file" value="input file">
+    	<input type="file" name="input_file" value="input_file">
 
     	<br>
     	<label>Upload output file : </label>
-    	<input type="file" name="output_file" value="output file">
+    	<input type="file" name="output_file" value="output_file">
 
     	<br>
     	<br>
