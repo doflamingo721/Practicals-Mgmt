@@ -12,6 +12,9 @@
 
 <HTML>
 	<BODY>
+	<script src="../Assets/allValidations.js">
+	
+	</script>
 		<h3> Batch Already Created </h3>
 		<table>
 			<tr>
@@ -27,13 +30,13 @@
 		</table>
 		<h3>Add Batch</h3>
 		<FORM action="php/addBatchMaster.php" method="post">
-			Add batch:<input type="text" name="batch" id="batch">
-				<input type="submit" value="submit">	
+			Add batch:<input type="text" value="" name="batch" id="batch" onchange="validateBatch()" required>
+				<input type="submit" value="Add Batch" id="submit">	
 		</FORM>
 		<h3>Delete Batch</h3>
 		<FORM action="php/deleteBatchMaster.php" method="post">
 			Batch:<input type="text" name="batch" id="batch">
-				<input type="submit" value="submit">	
+				<input type="submit" value="Delete Batch">	
 		</FORM>
 
 	</BODY>

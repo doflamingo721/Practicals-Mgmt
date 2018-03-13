@@ -11,21 +11,10 @@
 ?>
 <HTML>
 	<HEAD>
-		<script type="text/javascript">
-			function createUsername()
-			{
-				with(window.document.forms.facultyInfo)
-		        {
-		            if(fname.value.length>0 && mname.value.length>0 && lname.value.length>0)
-		            {
-		                uname.readonly=false;
-		                uname.value=fname.value.substr(0,1)+mname.value.substr(0,1)+lname.value;
-		                uname.readonly=true;
-		                alert("Your username : "+uname.value);
-		            }
-		        }
-			}
-		</script>
+		<script src="../Assets/allValidations.js">
+			
+
+</script>
 	</HEAD>
 	<BODY>
 		<h3> Faculty already added </h3>
@@ -44,17 +33,17 @@
 
 		<h3>Add Faculty</h3>
 		<FORM name="facultyInfo" method="POST" action="php/addFacultyMaster.php">
-			Enter First Name:<input type="text" id="fname" name="fname" onchange="createUsername()"><br>
-			Enter Middle Name:<input type="text" id="mname" name="mname" onchange="createUsername()"><br>
-			Enter Last Name:<input type="text" id="lname" name="lname" onchange="createUsername()"><br>
+			Enter First Name:<input type="text" id="fname" name="fname" onchange="createUsername(),validateFName()" required><br>
+			Enter Middle Name:<input type="text" id="mname" name="mname" onchange="createUsername(),validateMName()" required><br>
+			Enter Last Name:<input type="text" id="lname" name="lname" onchange="createUsername(),validateLName()" required><br>
 			UserName:<input type="text" id="uname" name="uname" readonly="readonly" ><br>
-			<input type="submit" value="submit"> 
+			<input type="submit" value="Add Faculty" id="submit"> 
 		</FORM>
 
 		<h3>Remove Faculty</h3>
 		<FORM name="facultyInfo" method="POST" action="php/deleteFacultyMaster.php">
 			Enter username:<input type="text" name="faculty_delete" id="username">
-			<input type="submit" name="submit">
+			<input type="submit" name="submit" value="Delete Faculty">
 		</FORM>
 	</BODY>
 </HTML>

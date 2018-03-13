@@ -2,7 +2,9 @@
   session_start();
   if($_SERVER['REQUEST_METHOD'] == 'POST')
   { 
-        $mysqli = new mysqli("localhost","root","","final project");
+        require("../Assets/db-conn.php");
+
+        //get the values entered
         $username = $_POST['username'];
         $oldpassword = $_POST['oldpassword'];
         $newpassword = $_POST['newpassword'];
@@ -11,11 +13,17 @@
         // mysql query here....
         $sql = "SELECT * FROM login WHERE username = '$username' and password = '$oldpassword'";
 
+        //Execute the query
         $result = $mysqli->query($sql);
+
+        //Get the number of rows retrived 
         $count = mysqli_num_rows($result);
 
+        //if that login id exists in the db
         if($count > 0)
         {
+
+            //Check if new password entered twice matches
             if($newpassword === $confirmnewpassword)
             {
               $s1 = "update login set password = '$confirmnewpassword' where username = '$username'";
@@ -26,7 +34,7 @@
             }
             else
             {
-              echo "<script>alert('the new password does not matches')</script>";
+              echo "<script>alert('The new password does not match')</script>";
             }
         }
         else
@@ -37,30 +45,10 @@
    } 
   
 
-    // else
-    // {
-    //     echo "<script>alert('Username or Password Incorrect')</script>";
-    //     //header("refresh:0 ; url=login_master.php");
-    // }
-  
-
-
-    // $result = mysql_query($sql);
-    // $count = mysql_num_rows($result);
-
-    // if($count == 1) {
-    //   session_register(username);
-    //   session_register(password);
-    //   header('location: addAssign.php');
-    // }
-    // else {
-    //   $error = "Invalid Username or Password Please Try Again";
-    
-
 
   ?>
   <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-  Enter your Username : <input type="text" name="username">
+  Enter your Username : <input type="text" name="username" >
   Enter old Password : <input type="password" name="oldpassword">
   Enter new password : <input type="password" name="newpassword">
   Confirm new password : <input type="password" name="confirmnewpassword">
