@@ -63,4 +63,85 @@
         }
       });
 
+
+
+
+
+
+
+       $("#batch").change(function() {
+        var batch_id = $(this).val();
+        var class_id = $("#class").val();
+        var sem_id = $("#semester").val();
+        var course_id = $("#course").val();
+        if(batch_id != "") {
+         
+          $.ajax({
+           
+            url:"getAssignmentTeacher.php",
+            data:{c_id:course_id,s_id:sem_id,class_id:class_id,b_id:batch_id},
+            type:'POST',
+            success:function(response) {
+              var resp = $.trim(response);
+              console.log(resp);
+              $("#assignment").html(resp);
+            }
+          });
+        } else {
+          $("#assignment").html("<option value=''>------- Select Assignment--------</option>");
+        }
+      });
+
+       $("#assignment").change(function() {
+        var assignment_no = $(this).val();
+        var class_id = $("#class").val();
+        var sem_id = $("#semester").val();
+        var course_id = $("#course").val();
+        var batch_id = $("#batch").val();
+        if(assignment_no != "") {
+         
+          $.ajax({
+           
+            url:"getQuestionTeacher.php",
+            data:{c_id:course_id,s_id:sem_id,class_id:class_id,b_id:batch_id,a_id:assignment_no},
+            type:'POST',
+            success:function(response) {
+              var resp = $.trim(response);
+              console.log(resp);
+              $("#question").html(resp);
+            }
+          });
+        } else {
+          // $("#assignment").html("<option value=''>------- Select Assignment--------</option>");
+        }
+      });
+
+       $("#assignment").change(function() {
+        var assignment_no = $(this).val();
+        var class_id = $("#class").val();
+        var sem_id = $("#semester").val();
+        var course_id = $("#course").val();
+        var batch_id = $("#batch").val();
+        if(assignment_no != "") {
+         
+          $.ajax({
+           
+            url:"getDescriptionTeacher.php",
+            data:{c_id:course_id,s_id:sem_id,class_id:class_id,b_id:batch_id,a_id:assignment_no},
+            type:'POST',
+            success:function(response) {
+              var resp = $.trim(response);
+              console.log(resp);
+              $("#description").html(resp);
+            }
+          });
+        } else {
+          // $("#assignment").html("<option value=''>------- Select Assignment--------</option>");
+        }
+      });
+
+
+
+
+
     });

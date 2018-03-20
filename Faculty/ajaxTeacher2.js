@@ -135,105 +135,29 @@
       });
 
 
-
-       $("#assignment").change(function() {
-        var assignment_no = $(this).val();
+$("#b1").click(function() { 
+        var assignment_no = $("#assignment").val();
         var class_id = $("#class").val();
         var sem_id = $("#semester").val();
         var course_id = $("#course").val();
         var batch_id = $("#batch").val();
-        if(assignment_no != "") {
-         
+
+        console.log("Check " + sem_id);
+
           $.ajax({
            
-            url:"getStudentTeacher.php",
+            url:"getInputFile2.php",
             data:{c_id:course_id,s_id:sem_id,class_id:class_id,b_id:batch_id,a_id:assignment_no},
             type:'POST',
             success:function(response) {
               var resp = $.trim(response);
-              console.log(resp);
-              $("#student").html(resp);
-            }
-          });
-        } else {
-           $("#student").html("<option value=''>------- Select Student--------</option>");
-        }
-      });
-
-
-
-       $("#student").change(function() {
-        var enrollment_id = $(this).val();
-        var assignment_no = $("#assignment").val();
-        var class_id = $("#class").val();
-        var sem_id = $("#semester").val();
-        var course_id = $("#course").val();
-        var batch_id = $("#batch").val();
-        if(enrollment_id != "") {
-         
-          $.ajax({
-           
-            url:"getInputFile.php",
-            data:{c_id:course_id,s_id:sem_id,class_id:class_id,b_id:batch_id,a_id:assignment_no,e_id:enrollment_id},
-            type:'POST',
-            success:function(response) {
-              var resp = $.trim(response);
-              console.log(resp);
               $("#output").html(resp);
             }
           });
-        } else {
-          // $("#assignment").html("<option value=''>------- Select Assignment--------</option>");
-        }
       });
 
 
 
-       $("#inputFile").click(function() {
-        var enrollment_id = $("student").val(); 
-        var assignment_no = $("#assignment").val();
-        var class_id = $("#class").val();
-        var sem_id = $("#semester").val();
-        var course_id = $("#course").val();
-        var batch_id = $("#batch").val();
-
-
-        if(enrollment_id != "") {
-         
-          $.ajax({
-           
-            url:"getInputFile.php",
-            data:{c_id:course_id,s_id:sem_id,class_id:class_id,b_id:batch_id,a_id:assignment_no,e_id:enrollment_id},
-            type:'POST',
-            success:function(response) {
-              var resp = $.trim(response);
-              console.log(resp);
-              $("#output").html(resp);
-            }
-          });
-        } else {
-          // $("#assignment").html("<option value=''>------- Select Assignment--------</option>");
-        }
-      });
-
-
- // $('#inputFile')
- //      .click(
- //         function(){
- //            var ID = 7;
-           
- //                        $('<img>', {
- //                              src: 'getInputFile.php?id=' + ID,
- //                              alt: 'Name of Image',
- //                        })
- //                         // If you want to fade the image to make it pretty
- //                        .hide()
- //                        .load(function(){
- //                              $(this).fadeIn('slow');
- //                        })
- //                        .appendTo('#output');
- //         }
- //      );
 
 
 
@@ -242,10 +166,8 @@
 
 
 
+  
 
 
 
-
-
-
-    });
+   

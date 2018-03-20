@@ -68,32 +68,9 @@
     	<label>Description :</label>
     	<textarea rows="2" cols="40" name="description" id="description" readonly></textarea>
 
-	    	<!-- <br>
-	    	<label>Start date : </label>
-	    	<input type="date" name="start_date" value="">
+	   <br>
+	   <input type="button" name="b1" id="b1" value="See marks">
 
-	    	<br>
-	    	<label>End date : </label>
-	    	<input type="date" name="end_date" value=""> -->
-
-	    	<br>
-			<label>Student :</label>
-	    	<select name="student" id="student"><option>------- Select Student --------</option></select>
-
-	    	<br>
-	    	<input type="submit" name="submit" value="submit">
-	    	<input type="reset" name="reset" value="reset">
-
-	    	<input type="button" name="inputFile" id="inputFile" value = "View Input File">
-
-	    	<input type="button" name="outputFile" id="outputFile" value = "View Output File">
-
-	    	<div id="output" style="display:block; height: 100%;"></div>
-
-	    	<div class="outputFile1" style="display:block; height: 100%;"></div>
-
-
-	    
 
 	<?php  
 			
@@ -105,5 +82,8 @@
 	?>
 
 </form>
+
+<div id="output"></div>
+
 </body>
 </html>

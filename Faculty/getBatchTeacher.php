@@ -22,6 +22,7 @@ FROM batch_master INNER JOIN student_allocation ON batch_master.batch_id = stude
     }
   }
 } else {
+   echo "errr";
  header('location: ./');
 }
 }

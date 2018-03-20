@@ -51,7 +51,7 @@
                       {
                       	$_SESSION["faculty_id"] = $row["faculty_id"];
                   	  }
-                    	//header("location: ../Faculty/addAssignmentMaster.php");
+                    	//header("location: ../Faculty/evaluateAssignment.php");
                       header("location: ../Faculty/addNoticeMaster.php");
                 	  }
                 }

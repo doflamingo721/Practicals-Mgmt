@@ -14,11 +14,28 @@ if(isset($_POST['a_id'])) {
 	$sql = "SELECT DISTINCT description FROM assignments WHERE sem_id='".$sem_id."' AND course_id='".$course_id."' AND class_id='".$class_id."' AND batch_id='".$batch_id."' AND assignment_no='".$assignment_no."'";
 
   $res = mysqli_query($mysqli, $sql);
-  if(mysqli_num_rows($res) > 0) {
-    while($row = mysqli_fetch_object($res)) {
+  if(mysqli_num_rows($res) > 0) 
+  {
+    while($row = mysqli_fetch_object($res)) 
+    {
       echo $row->description;
     }
   }
+
+
+
+  // $sqll = "SELECT assignment_submission.enrollment_id , student_master.fname , student_master.lname FROM assignment_submission INNER JOIN student_master ON student_master.enrollment_id = assignment_submission.enrollment_id  WHERE assignment_submission.sem_id='".$sem_id."' AND assignment_submission.course_id='".$course_id."' AND assignment_submission.class_id='".$class_id."' AND assignment_submission.batch_id='".$batch_id."' AND assignment_submission.assignment_no='".$assignment_no."'";
+
+
+
+  else
+  {
+     echo "errrdhfgjsa";
+  }
+
+
+
+
 } else {
  header('location: ./');
 }

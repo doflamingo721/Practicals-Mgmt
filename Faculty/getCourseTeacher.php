@@ -14,11 +14,18 @@ FROM course_master INNER JOIN student_allocation ON course_master.course_id=stud
   $res = mysqli_query($mysqli, $sql);
   if(mysqli_num_rows($res) > 0) {
     echo "<option value=''>------- Select --------</option>";
-    while($row = mysqli_fetch_object($res)) {
+    while($row = mysqli_fetch_object($res))
+     {
       echo "<option value='".$row->course_id."'>".$row->course_name."</option>";
     }
   }
+  else
+  {
+     echo "errrdhfgjsjhgfha";
+  }
 } else {
+  echo "errrrrrrrrrrrrrrrrrrrrrrrrrrr";
+  echo $mysqli->error;
  header('location: ./');
 }
 }

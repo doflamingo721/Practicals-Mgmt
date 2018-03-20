@@ -20,6 +20,7 @@ FROM class_master INNER JOIN student_allocation ON class_master.class_id = stude
     }
   }
 } else {
+  echo "smdhfg";
  header('location: ./');
 }
 }
