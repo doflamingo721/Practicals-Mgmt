@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 // Inialize session
@@ -10,3 +11,19 @@ session_start();
 header("refresh:0;url=./");
 
 ?>
+=======
+<?php
+
+// Inialize session
+session_start();
+
+// Delete certain session
+//unset($_SESSION['username']);
+// Delete all session variables
+ session_destroy();
+
+// Jump to login page
+header('Location: loginMaster.php');
+
+?>
+>>>>>>> master

@@ -24,7 +24,12 @@ FROM batch_master INNER JOIN student_allocation ON batch_master.batch_id = stude
 		Echo "Error In Query";
 	}
 } else {
+<<<<<<< HEAD
    echo "Invalid Credentials";
  header("refresh:0;url=../Login/index.php");
+=======
+   echo "errr";
+ header('location: ./');
+>>>>>>> master
 }
 }

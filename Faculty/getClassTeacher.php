@@ -22,7 +22,12 @@ FROM class_master INNER JOIN student_allocation ON class_master.class_id = stude
 		echo "Error in Query";
 	}
 } else {
+<<<<<<< HEAD
   echo "Invalid Credentials";
  header("refresh:0;url=../Login/index.php");
+=======
+  echo "smdhfg";
+ header('location: ./');
+>>>>>>> master
 }
 }

@@ -21,10 +21,19 @@ FROM course_master INNER JOIN student_allocation ON course_master.course_id=stud
   }
   else
   {
+<<<<<<< HEAD
      echo "Error In Query";
   }
 } else {
   echo "Invalid Credentials";
  header("refresh:0;url=../Login/index.php");
+=======
+     echo "errrdhfgjsjhgfha";
+  }
+} else {
+  echo "errrrrrrrrrrrrrrrrrrrrrrrrrrr";
+  echo $mysqli->error;
+ header('location: ./');
+>>>>>>> master
 }
 }
