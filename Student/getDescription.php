@@ -1,7 +1,11 @@
 <?php
 session_start();
-if($_SESSION["username"] == "student")
-{
+
+if(!isset($_SESSION["username"]) && $_SESSION["username"] != "student") {
+	echo "Invalid Credentials";
+	header("refresh:0;url=../Login/index.php");
+}
+
 	require("../Assets/db-conn.php");
 if(isset($_POST['a_id'])) {
 	  $course_id = $_POST['c_id'];
@@ -22,4 +26,5 @@ if(isset($_POST['a_id'])) {
 } else {
  header('location: ./');
 }
-}
+?>
+

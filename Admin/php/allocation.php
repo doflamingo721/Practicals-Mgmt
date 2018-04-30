@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION["username"]) && $_SESSION["username"] != "admin") {
+  echo "Invalid Credentials";
+  header("refresh:0;url=../Login/index.php");
+}
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -19,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT into student_allocation(enrollment_id,class_id,sem_id,course_id,faculty_id,batch_id) VALUES
             ('$startingEnroll','$class','$semester','$course','$faculty','$batch')";
     if($mysqli->query($sql)) {
-
+      header("refresh:0;url=../index.php#divisionAllocation");
     }else {
       echo "Error while adding ".$startingEnroll."<br>";
     }

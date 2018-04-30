@@ -10,6 +10,7 @@
             type:'POST',
             success:function(response) {
               console.log("success");
+				console.log(" " + response);
               var resp = $.trim(response);
               $("#course").html(resp);
             }
@@ -136,3 +137,4 @@
 
 
     });
+    

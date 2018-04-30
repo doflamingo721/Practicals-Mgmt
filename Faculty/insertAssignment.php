@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if(!isset($_SESSION["username"]) && $_SESSION["username"] != "faculty") {
+	echo "Invalid Credentials";
+	header("refresh:0;url=../Login/index.php");
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 	require("../Assets/db-conn.php");
@@ -18,9 +23,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	$end_date=$_POST['end_date'];
 
 	$start = date('Y-m-d',strtotime($start_date));
-	$end = date('Y-m-d',strtotime($last_date));
+	$end = date('Y-m-d',strtotime($end_date));
 
-	//Insert data 
+	//Insert data
 	 // Check if assignment already exists
 		$sql = "Select assignment_no from assignments where assignment_no='".$assignment_no."' and course_id='".$course_id."' and class_id='".$class_id."' and batch_id='".$batch_id."' and faculty_id='".$faculty_id."'";
 
@@ -30,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		if($result->num_rows > 0)
 		{
 			echo "<script>alert('Assignment already exists')</script>" ;
-			header("refresh:0; url=addAssignmentMaster.php");
+			header("refresh:0; url=index.php#addAssignmentMaster");
 		}
 		else
 		{
@@ -41,14 +46,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			if($mysqli->query($sql))
 			{
 				echo "<script>alert('Assignment Added Successfully')</script>" ;
-				header("refresh:0; url=addAssignmentMaster.php");
+				header("refresh:0; url=index.php#addAssignmentMaster");
 			}
-			else 
+			else
 			{
 				//echo $mysqli->error;
 				// echo "<script>alert('Assignment could not be added')</script>" ;
-				header("refresh:0; url=addAssignmentMaster.php");
+				header("refresh:0; url=index.php#addAssignmentMaster");
 			}
 		}
+} else {
+	echo "Error Occurred";
 }
 ?>

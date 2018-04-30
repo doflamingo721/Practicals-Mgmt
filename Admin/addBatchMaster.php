@@ -1,4 +1,10 @@
 <?php
+	session_start();
+	if(!isset($_SESSION["username"]) && $_SESSION["username"] != "admin") {
+		echo "Invalid Credentials";
+		header("refresh:0;url=../Login/index.php");
+	}
+
 	require("../Assets/db-conn.php");
 
 	// Create query to retrieve class names
@@ -11,8 +17,12 @@
 ?>
 
 <HTML>
+	<link rel="stylesheet" href="../Assets/css/style.css">
 	<BODY>
-		<h3> Batch Already Created </h3>
+	<script src="../Assets/allValidations.js">
+
+	</script>
+		<h3> Existing Batches</h3>
 		<table>
 			<tr>
 				<th>Sr No</th>
@@ -27,13 +37,15 @@
 		</table>
 		<h3>Add Batch</h3>
 		<FORM action="php/addBatchMaster.php" method="post">
-			Add batch:<input type="text" name="batch" id="batch">
-				<input type="submit" value="submit">	
+			<label id="stylelabel">Add batch:</label>
+			<input type="text" value="" name="batch" id="batch" onchange="validateBatch()" required><br>
+				<input type="submit" value="Add Batch" id="submit">
 		</FORM>
 		<h3>Delete Batch</h3>
 		<FORM action="php/deleteBatchMaster.php" method="post">
-			Batch:<input type="text" name="batch" id="batch">
-				<input type="submit" value="submit">	
+			<label id="stylelabel">Batch:</label>&emsp;&nbsp;&nbsp;
+			<input type="text" name="batch" id="batch"><br>
+				<input type="submit" value="Delete Batch">
 		</FORM>
 
 	</BODY>

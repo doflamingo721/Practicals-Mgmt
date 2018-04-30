@@ -1,28 +1,27 @@
-// Add Assignment
-
 <!DOCTYPE html>
 <html>
+	<link rel="stylesheet" href="../Assets/css/style.css">
 <head>
-	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="../Assets/jquery.min.js"></script>
 	<script type="text/javascript" src="ajaxTeacher.js"></script>
 
 
-	
-	
+
+
 	<title></title>
 </head>
 <?php
 	session_start();
-	if($_SESSION["username"] == "faculty")
+	if(isset($_SESSION["username"]) && $_SESSION["username"] == "faculty")
 	{
 		require("../Assets/db-conn.php");
 ?>
 	<body>
 	<form action="insertAssignment.php" method="POST">
-	    <label>Semester :</label>
+	    <label id="stylelabel">Semester :</label>&emsp;&emsp;&nbsp;&nbsp;
 	    <select name="semester" id="semester">
 	      <option>------- Select semester--------</option>
-	<?php 
+	<?php
 	      $sql = "SELECT * FROM semester_master";
 
 			// Obtain result set
@@ -34,57 +33,58 @@
 				{
 
 				   echo "<option value='$row[sem_id]'>$row[sem_name]</option>";
-				}		
+				}
 			}
 			else
 			{
 				echo "no entries found";
-			}  
+			}
 	?>
 			</select>
 			<br>
-			<label>Course :</label>
+			<label id="stylelabel">Course :</label>&emsp;&emsp;&emsp;&nbsp;
 	    	<select name="course" id="course"><option>------- Select Course --------</option></select>
 	    	<br>
-	    	<label>Class :</label>
+	    	<label id="stylelabel">Class :</label>&emsp;&emsp;&emsp;&emsp;
 	    	<select name="class" id="class"><option>------- Select Class--------</option></select>
 
 	    	<br>
-	    	<label>Batch :</label>
+	    	<label id="stylelabel">Batch :</label>&emsp;&emsp;&emsp;&emsp;
 	    	<select name="batch" id="batch"><option>------- Select Batch--------</option></select>
 
 	    	<br>
-	    	<label>Assignment No :</label>
+	    	<label id="stylelabel">Assignment No :</label>
 	    	<input type="text" name="assignment_no" id="assignment_no" value="">
 
 	    	<br>
-	    	<label>Question :  </label>
+	    	<label id="stylelabel">Question :  </label><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
 	    	<textarea rows="2" cols="40" name="question" id="question"></textarea>
 
 	    	<br>
-	    	<label>Description :</label>
+	    	<label>Description :</label><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
 	    	<textarea rows="2" cols="40" name="description" id="description"></textarea>
 
 	    	<br>
-	    	<label>Start date : </label>
+	    	<label id="stylelabel">Start date : </label>
 	    	<input type="date" name="start_date" value="">
 
 	    	<br>
-	    	<label>End date : </label>
+	    	<label id="stylelabel">End date : </label>
 	    	<input type="date" name="end_date" value="">
 
-	    	<br>
+	    	<br><br>
 	    	<input type="submit" name="submit" value="submit">
 	    	<input type="reset" name="reset" value="reset">
 
 
 
-	<?php  
-			
+	<?php
+
 		}
 		else
 		{
 			echo "Invalid credentials";
+			header("refresh:0;url=../Login/index.php");
 		}
 	?>
 

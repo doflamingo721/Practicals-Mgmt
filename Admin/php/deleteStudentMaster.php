@@ -1,6 +1,11 @@
 <?php
 	// php file to delete student from database
-	
+
+	if(!isset($_SESSION["username"]) && $_SESSION["username"] != "admin") {
+		echo "Invalid Credentials";
+		header("refresh:0;url=../Login/index.php");
+	}
+
 	// Check if POST request
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
@@ -23,18 +28,18 @@
 			if($mysqli->query($sql))
 			{
 				echo "<script>alert('Student deleted successfully');</script>";
-				 header("refresh:0;url=../addStudentMaster.php");
+				 header("refresh:0; url=../index.php#addStudentMaster");
 			}
 			else
 			{
 				echo "<script>alert('Student can not be deleted');</script>";
-				 header("refresh:0;url=../addStudentMaster.php");
+				 header("refresh:0; url=../index.php#addStudentMaster");
 			}
-		} 
+		}
 		else
 		{
 			echo "<script>alert('Student does not exist');</script>";
-			 header("refresh:0;url=../addStudentMaster.php");
+			 header("refresh:0; url=../index.php#addStudentMaster");
 		}
 	}
 ?>

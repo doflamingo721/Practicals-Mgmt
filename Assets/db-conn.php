@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "prac-mgmt";
+$database = "practi";
 
 $mysqli = new mysqli($host,$username,$password,$database);
 

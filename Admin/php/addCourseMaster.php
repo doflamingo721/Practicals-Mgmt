@@ -1,6 +1,11 @@
 <?php
 	// php file to add course to database
-	
+
+	if(!isset($_SESSION["username"]) && $_SESSION["username"] != "admin") {
+		echo "Invalid Credentials";
+		header("refresh:0;url=../Login/index.php");
+	}
+
 	// Check the request method
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
@@ -10,7 +15,7 @@
 		//Capture the info sent previously by POST Method
 		$coursename= mysqli_real_escape_string($mysqli,$_POST["coursename"]);
 		$coursecode= mysqli_real_escape_string($mysqli,$_POST["coursecode"]);
-		
+
 
 		// Check if course code already exists
 		$sql = "SELECT course_code FROM course_master WHERE course_code='".$coursecode."'";
@@ -21,7 +26,7 @@
 		if($result->num_rows > 0)
 		{
 			echo "<script>alert('Course already exists')</script>" ;
-			header("refresh:0; url=../addCourseMaster.php");
+			header("refresh:0; url=../index.php#addCourseMaster");
 		}
 		else
 		{
@@ -54,13 +59,13 @@
 			if($mysqli->query($sql))
 			{
 				echo "<script>alert('Course added Successfully')</script>" ;
-				// header("refresh:0; url=../addCourseMaster.php");
+				header("refresh:0; url=../index.php#addCourseMaster");
 			}
-			else 
+			else
 			{
 				//echo $mysqli->error;
 				echo "<script>alert('Course can not be added')</script>" ;
-				// header("refresh:0; url=../addCourseMaster.php");
+				header("refresh:0; url=../index.php#addCourseMaster");
 			}
 		}
 

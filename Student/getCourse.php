@@ -1,8 +1,11 @@
 <?php
 session_start();
-if($_SESSION["username"] == "student")
-{
-	require("../Assets/db-conn.php");
+if(!isset($_SESSION["username"]) && $_SESSION["username"] != "student") {
+	echo "Invalid Credentials";
+	header("refresh:0;url=../Login/index.php");
+}
+
+require("../Assets/db-conn.php");
 if(isset($_POST['s_id'])) {
 	$enrollment_id=$_SESSION["enrollment_id"];
 	 $sem_id = $_POST['s_id'];
@@ -13,12 +16,13 @@ FROM course_master INNER JOIN student_allocation ON course_master.course_id=stud
 
   $res = mysqli_query($mysqli, $sql);
   if(mysqli_num_rows($res) > 0) {
-    echo "<option value=''>------- Select --------</option>";
-    while($row = mysqli_fetch_object($res)) {
-      echo "<option value='".$row->course_id."'>".$row->course_name."</option>";
-    }
+	echo "<option value=''>------- Select --------</option>";
+	while($row = mysqli_fetch_object($res)) {
+	  echo "<option value='".$row->course_id."'>".$row->course_name."</option>";
+	}
   }
 } else {
  header('location: ./');
 }
-}
+
+?>

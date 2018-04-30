@@ -2,7 +2,7 @@
   session_start();
   if($_SERVER['REQUEST_METHOD'] == 'POST')
   {
-        $mysqli = new mysqli("localhost","root","","branch");
+        require("../Assets/db-conn.php");
         $username = $_POST['username'];
         $password = $_POST['password'];
         // mysql connect function here....

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["username"] == "faculty")
+if(isset($_SESSION["username"]) && $_SESSION["username"] == "faculty")
 {
 	require("../Assets/db-conn.php");
 if(isset($_POST['c_id'])) {
@@ -18,8 +18,11 @@ FROM class_master INNER JOIN student_allocation ON class_master.class_id = stude
     while($row = mysqli_fetch_object($res)) {
       echo "<option value='".$row->class_id."'>".$row->class_name."</option>";
     }
-  }
+  } else {
+		echo "Error in Query";
+	}
 } else {
- header('location: ./');
+  echo "Invalid Credentials";
+ header("refresh:0;url=../Login/index.php");
 }
 }
